@@ -38,8 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         signUp = findViewById(R.id.singin_goto_signup);
         forgotPassword = findViewById(R.id.signin_forgot_password);
 
-         Email = email.getText().toString().trim();
-         Password = password.getText().toString().trim();
+         //Email = email.getText().toString().trim();
+         //Password = password.getText().toString().trim();
 
 
         //Email = email.getText().toString().trim();
@@ -50,22 +50,26 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                 //Email = email.getText().toString().trim();
-                 //Password = password.getText().toString().trim();
+                 Email = email.getText().toString().trim();
+                 Password = password.getText().toString().trim();
 
                 if (TextUtils.isEmpty(Email)){
                     email.setError("enter your email");
-                    return;
+                    //return;
 
                 }if (TextUtils.isEmpty(Password)){
                     password.setError("enter password");
                 }else {
-                    checkNetwork();
+                    checkNetwork(Email, Password);
                 }
 
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
+                //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //finish();
             }
+
+            //private void checkNetwork(String email, String password) {
+
+            //}
         });
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -85,16 +89,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void checkNetwork(){
+    private void checkNetwork(String Email, String Password){
         if (isNetWorkAvailable()){
-            mAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener
+                    (this, new OnCompleteListener<AuthResult>() {
 
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         Log.d("login", "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
+                        //updateUI(user);
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else {
                         Log.w("sign in", "signInWithEmail:failure", task.getException());
@@ -118,8 +123,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+       //FirebaseUser currentUser = mAuth.getCurrentUser();
+       //updateUI(currentUser);
     }
 
     private void updateUI(FirebaseUser currentUser) {
