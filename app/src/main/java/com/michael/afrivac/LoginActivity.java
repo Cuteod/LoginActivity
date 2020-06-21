@@ -62,8 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                 }else {
                     checkNetwork();
                 }
-                //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                //finish();
 
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
